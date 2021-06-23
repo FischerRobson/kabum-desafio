@@ -18,7 +18,7 @@ export const AuthProvider: React.FC = ({ children }) => {
     if (user === "fischer" && password === "123") {
       Cookie.set("kabum:logged", "true");
       setLogged(true);
-    } else alert("senha errada trouxa!");
+    } else alert("usuário ou senha incorretos!");
   };
 
   const signOut = () => {

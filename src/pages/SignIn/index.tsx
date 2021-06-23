@@ -45,7 +45,8 @@ const SignIn: React.FC = () => {
           required
         />
 
-        <Button type="submit">Acessar</Button>
+        <Button type="submit" color="red">Acessar</Button>
+        <Button type="button" color="green">Novo aqui? Se cadastre agora!</Button>
       </Form>
     </Container>
   );

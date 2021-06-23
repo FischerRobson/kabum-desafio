@@ -11,7 +11,7 @@ interface ICardProps {
 
 const Card: React.FC<ICardProps> = ({ cliente }) => {
     
-    const {nome, rg, cpf, dataNascimento, telefone } = cliente;
+  const {nome, rg, cpf, dataNascimento, telefone } = cliente;
 
   return (
     <Container> 

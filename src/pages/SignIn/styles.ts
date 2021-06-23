@@ -23,12 +23,13 @@ export const Logo = styled.div`
 
 export const Form = styled.form`
   width: 300px;
-  height: 340px;
+  height: 390px;
   background-color: ${(props) => props.theme.colors.secondary};
   padding: 30px;
   border-radius: 10px;
+
   > button{
-      margin-top: 28px;
+      margin-top: 18px;
   }
 `;
 

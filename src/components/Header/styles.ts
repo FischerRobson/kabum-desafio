@@ -33,8 +33,33 @@ export const MenuOption = styled.h2`
     &:hover {
         opacity: 0.7;
     }
+
+    > a {
+        text-decoration: none;
+        color: ${props => props.theme.colors.white};
+    }
 `
 
 export const ToogleTheme = styled.div`
-    
+    margin-right: 15rem;
 `
+
+export const LogOut = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    transition: all .3s;
+    
+    &:hover {
+        opacity: 0.7;
+    }
+
+    > svg {
+        color: ${props => props.theme.colors.warning};
+        width: 32px;
+        height: 32px;
+    }
+` 

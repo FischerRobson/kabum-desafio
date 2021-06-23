@@ -3,13 +3,15 @@ import ReactDOM from 'react-dom';
 
 import App from './App';
 
-import {ThemeProvider} from './hooks/ThemeContext'
-
+import { ThemeProvider } from './hooks/ThemeContext'
+import { AuthProvider } from './hooks/AuthContext'
 
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider>
-      <App />
+      <AuthProvider>
+        <App />
+      </AuthProvider>
     </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root')

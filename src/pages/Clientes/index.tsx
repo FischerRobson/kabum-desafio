@@ -1,12 +1,14 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-import { Container } from "./styles";
+import { Header, Container, Content, AddCliente } from "./styles";
 
-import { api_clientes } from "../../consts/apis";
+import { api_listar_clientes } from "../../consts/apis";
 
-import Card from '../../components/Card';
+import Card from '../../components/CardCliente';
 import { convertObjectToArray } from "../../utils/convertObjectToArray";
+import { IoMdAdd } from 'react-icons/io'
+
 
 export interface ICliente {
     id: number;
@@ -17,12 +19,13 @@ export interface ICliente {
     telefone: string;
 }
 
+
 const Clientes = () => {
 
     const [ clientes, setClientes ] = useState<ICliente[]>([])
-
+    
     const getClientes = async () => {
-        const { data } = await axios.get(api_clientes);
+        const { data } = await axios.get(api_listar_clientes);
         setClientes(convertObjectToArray(data.records));
     }
 
@@ -30,20 +33,22 @@ const Clientes = () => {
         getClientes();
     }, []);
 
-    // useEffect(() => {
-    //     clientes.map(cliente => {
-    //         console.log(cliente)
-    //     })
-    // }, [clientes])
-
     return (
-        <Container>
-            { clientes.map(cliente => {
-                return (
-                    <Card key={cliente.id} cliente={cliente} />
-            )
-        })}
-        </Container>
+            <Container>
+                <Header>
+                    <h3>Clientes: {clientes.length}</h3>
+                    <AddCliente >
+                        <IoMdAdd />
+                    </AddCliente>
+                </Header>
+                <Content>
+                    { clientes.map(cliente => {
+                        return (
+                        <Card key={cliente.id} cliente={cliente} />
+                    )
+                    })}
+                </Content>
+            </Container>
     )
 }
 
