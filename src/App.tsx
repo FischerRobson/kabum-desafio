@@ -1,9 +1,20 @@
+import { ThemeProvider } from "styled-components";
+
+import GlobalStyles from "./styles/global";
+
+import { useTheme } from './hooks/ThemeContext';
+
+import Routes from "./routes";
 
 function App() {
+
+  const { theme } = useTheme();
+
   return (
-    <div className="App">
-      casada
-    </div>
+    <ThemeProvider theme={theme}>
+      <GlobalStyles />
+      <Routes />
+    </ThemeProvider>
   );
 }
 

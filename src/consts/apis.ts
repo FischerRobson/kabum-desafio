@@ -1,0 +1,1 @@
+export const api_clientes = "http://localhost/api/index.php";
