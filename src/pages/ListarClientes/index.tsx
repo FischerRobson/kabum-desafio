@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 import { Header, Container, Content, AddCliente } from "./styles";
 
@@ -37,9 +38,11 @@ const Clientes = () => {
             <Container>
                 <Header>
                     <h3>Clientes: {clientes.length}</h3>
+                <Link to="/clientes/new">
                     <AddCliente >
                         <IoMdAdd />
                     </AddCliente>
+                </Link>
                 </Header>
                 <Content>
                     { clientes.map(cliente => {

@@ -50,4 +50,36 @@ export const Info = styled.main`
        align-items: center;
        justify-content: space-between;
    }
+   
+`
+
+
+export const SideBar = styled.aside`
+   background: ${props => props.theme.colors.white};
+   height: 100%;
+   width: 10%;
+   border-radius: 8px;
+
+   display: flex;
+   align-items: center;
+   justify-content: space-around;
+   flex-direction: column;
+
+   .edit {
+      color: ${props => props.theme.colors.success};
+   }
+
+   .delete {
+      color: ${props => props.theme.colors.warning};
+   }
+
+   svg {
+      transition: all .2s;
+      cursor: pointer;
+   }
+
+   svg:hover {
+      opacity: 0.7;
+   }
+
 `

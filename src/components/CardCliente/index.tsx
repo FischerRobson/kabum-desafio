@@ -1,8 +1,13 @@
 import React from "react";
 
-import { Container, Logo, Info } from "./styles";
+import { Container, Logo, Info, SideBar } from "./styles";
+
+import { Link } from 'react-router-dom';
 
 import { FaUserAlt } from 'react-icons/fa'
+import { FiEdit } from 'react-icons/fi';
+import { RiDeleteBin5Line } from 'react-icons/ri';
+
 import { ICliente } from "../../pages/ListarClientes";
 
 interface ICardProps {
@@ -11,7 +16,7 @@ interface ICardProps {
 
 const Card: React.FC<ICardProps> = ({ cliente }) => {
     
-  const {nome, rg, cpf, dataNascimento, telefone } = cliente;
+  const { id ,nome, rg, cpf, dataNascimento, telefone } = cliente;
 
   return (
     <Container> 
@@ -28,7 +33,13 @@ const Card: React.FC<ICardProps> = ({ cliente }) => {
                 <span>Nascimento: </span><p>{ dataNascimento }</p>
                 <span>Telefone: </span><p>{ telefone }</p> 
               </div>
-          </Info>
+      </Info>
+      <SideBar>
+        <Link to={`/clientes/${id}`} >
+          <FiEdit className="edit" />
+        </Link>
+        <RiDeleteBin5Line className="delete" />
+      </SideBar>
     </Container>
   );
 };
