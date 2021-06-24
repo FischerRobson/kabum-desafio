@@ -23,7 +23,14 @@ export interface ICliente {
 
 const Clientes = () => {
 
-    const [ clientes, setClientes ] = useState<ICliente[]>([])
+    const [clientes, setClientes] = useState<ICliente[]>([]);
+
+    const [reload, setReload] = useState(false);
+
+    const reloadPage = () => {
+        console.log('reload')
+        setReload(!reload);
+    }
     
     const getClientes = async () => {
         const { data } = await axios.get(api_listar_clientes);
@@ -32,7 +39,7 @@ const Clientes = () => {
 
     useEffect(() => {
         getClientes();
-    }, []);
+    }, [reload]);
 
     return (
             <Container>
@@ -47,7 +54,7 @@ const Clientes = () => {
                 <Content>
                     { clientes.map(cliente => {
                         return (
-                        <Card key={cliente.id} cliente={cliente} />
+                        <Card key={cliente.id} cliente={cliente} reload={reloadPage} />
                     )
                     })}
                 </Content>

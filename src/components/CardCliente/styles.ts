@@ -4,12 +4,18 @@ export const Container = styled.div`
     margin: 15px 20px;
     background: ${props => props.theme.colors.tertiary};
     height: 130px;
+    //width: 46%;
+    //width: 90%;
     width: 30%;
 
     border-radius: 8px;
 
     display: flex;
     align-items: center;
+
+    @media (width: 768px) {
+      width: 90%;
+   }
 `
 
 export const Logo = styled.aside`

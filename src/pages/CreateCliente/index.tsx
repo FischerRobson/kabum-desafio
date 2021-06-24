@@ -5,7 +5,7 @@ import Button from "../../components/Button";
 import { toast } from 'react-toastify';
 import { useHistory, useParams } from 'react-router-dom';
 import axios, { AxiosError } from "axios";
-import { api_cadastar_cliente, api_cadastrar_user, api_get_user, api_update_user } from "../../consts/apis";
+import { api_cadastar_cliente, api_cadastrar_user, api_get_cliente, api_get_user, api_update_cliente, api_update_user } from "../../consts/apis";
 import { useEffect } from "react";
 import TelefoneInput from "../../components/TelefoneInput";
 import CpfInput from "../../components/CpfInput";
@@ -31,7 +31,13 @@ const CreateCliente = () => {
     const params = useParams<UserRouteParams>();
     const clienteId = params.id;
 
-    const [cliente, setCliente] = useState<ICliente>({} as ICliente);
+    const [cliente, setCliente] = useState<ICliente>({
+        nome: "",
+        cpf: "",
+        rg: "",
+        dataNascimento: "",
+        telefone: "",
+    } as ICliente);
 
     const updateCpf = (value: string) => {
         setCliente({ ...cliente, cpf: value });
@@ -67,12 +73,38 @@ const CreateCliente = () => {
          })
     }
 
+    const getCliente= async () => {
+        await axios.get(api_get_cliente + "?id=" + clienteId)
+            .then(res => {
+                setCliente(res.data.cliente);
+            }).catch(error => {
+                console.log(error);
+            })
+    }
+
+    const updateCliente = async () => {
+        await axios.post(api_update_cliente, cliente)
+            .then(res => {
+               toast.success("Cliente Atualizado!", {
+                    onOpen: () => returnPage(),
+                })
+            }
+            ).catch(error => {
+                console.log(error);
+                console.log(error.message);
+            })
+    }
+
     const addCliente = () => {
         if (!cliente.nome || !cliente.cpf || !cliente.dataNascimento || !cliente.rg) return toast.warn("Preencha todos os campos!");
         if (!validateCpf(cliente.cpf)) return toast.warn("CPF inválido");
-        if (clienteId) return;
+        if (clienteId) updateCliente();
         else saveCliente();
     }
+
+    useEffect(() => {
+        if(clienteId) getCliente();
+    }, [clienteId])
 
     return (
         <Body>

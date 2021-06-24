@@ -67,7 +67,7 @@ const CreateUser = () => {
     }
 
     useEffect(() => {
-        getUser();
+        if(userId) getUser();
     }, [userId])
 
     const addUser = () => {
