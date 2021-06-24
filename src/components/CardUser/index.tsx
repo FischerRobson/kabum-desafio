@@ -1,9 +1,13 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 
-import { Container, Logo, Info } from "./styles";
+import { Container, Logo, Info, SideBar } from "./styles";
 
-import { FaUserAlt } from 'react-icons/fa'
-import { IUser } from "../../pages/Users/Users";
+import { FaUserAlt } from 'react-icons/fa';
+import { FiEdit } from 'react-icons/fi';
+import { RiDeleteBin5Line } from 'react-icons/ri';
+
+import { IUser } from "../../pages/ListarUsers";
 
 interface ICardProps {
     user: IUser;
@@ -11,7 +15,7 @@ interface ICardProps {
 
 const Card: React.FC<ICardProps> = ({ user }) => {
     
-  const { username, password, nivel } = user;
+  const { id, username, password, nivel } = user;
 
   return (
     <Container> 
@@ -21,7 +25,13 @@ const Card: React.FC<ICardProps> = ({ user }) => {
           <Info>
               <h3>{username}</h3>
               <p>Nivel: { nivel }</p>
-          </Info>
+      </Info>
+      <SideBar>
+        <Link to={`/users/${id}`} >
+          <FiEdit className="edit" />
+        </Link>
+        <RiDeleteBin5Line className="delete" />
+      </SideBar>
     </Container>
   );
 };

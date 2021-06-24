@@ -3,7 +3,7 @@ import React from "react";
 import { Container, Logo, Info } from "./styles";
 
 import { FaUserAlt } from 'react-icons/fa'
-import { ICliente } from "../../pages/Clientes";
+import { ICliente } from "../../pages/ListarClientes";
 
 interface ICardProps {
     cliente: ICliente;
