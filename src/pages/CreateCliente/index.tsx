@@ -1,4 +1,4 @@
-import { Body, Container, Title, InputContainer, Footer } from "./styles";
+import { Body, Container, Title, InputContainer, Footer, Endereco, TableEnderecos } from "./styles";
 import Input from "../../components/Input";
 import { useState } from "react";
 import Button from "../../components/Button";
@@ -10,6 +10,9 @@ import { useEffect } from "react";
 import TelefoneInput from "../../components/TelefoneInput";
 import CpfInput from "../../components/CpfInput";
 import validateCpf from "../../utils/validateCpf";
+import CadastrarEndereco from "./CadastrarEndereco";
+import { convertObjectToArray } from "../../utils/convertObjectToArray";
+import { IEndereco } from './CadastrarEndereco';
 
 type UserRouteParams = {
     id: string;
@@ -22,6 +25,7 @@ interface ICliente {
     rg: string;
     dataNascimento: string;
     telefone?: string;
+    enderecos?: IEndereco[];
 }
 
 const CreateCliente = () => {
@@ -38,10 +42,6 @@ const CreateCliente = () => {
         dataNascimento: "",
         telefone: "",
     } as ICliente);
-
-    const updateCpf = (value: string) => {
-        setCliente({ ...cliente, cpf: value });
-    }
 
     const updateInputValue = (e: React.SyntheticEvent) => {
         const { name, value } = e.target as HTMLInputElement;
@@ -76,7 +76,13 @@ const CreateCliente = () => {
     const getCliente= async () => {
         await axios.get(api_get_cliente + "?id=" + clienteId)
             .then(res => {
-                setCliente(res.data.cliente);
+                const cliente = res.data.cliente;
+                let enderecos = convertObjectToArray(cliente.enderecos);
+                enderecos = convertObjectToArray(enderecos);
+                console.log(enderecos)
+                cliente.enderecos = [...enderecos]
+                console.log(enderecos)
+                setCliente(cliente);
             }).catch(error => {
                 console.log(error);
             })
@@ -147,7 +153,40 @@ const CreateCliente = () => {
                     <Button color="red" >Cancelar</Button>
                     <Button color="green" onClick={() => addCliente()}>Salvar</Button>
                 </Footer>
-                </Container>
+            </Container>
+            
+            <Endereco>
+                {/* <CadastrarEndereco clienteId={Number(clienteId)} /> */}
+            </Endereco>
+            <TableEnderecos>
+                <h4>Endereços</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Logradouro</th>
+                            <th>Número</th>
+                            <th>Bairro</th>
+                            <th>Cidade</th>
+                            <th>Uf</th>
+                            <th>Complemento</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {cliente.enderecos && cliente.enderecos.map(endereco => {
+                            return (
+                                <tr key={endereco.id}>
+                                    <td>{ endereco.logradouro }</td>
+                                    <td>{ endereco.numero }</td>
+                                    <td>{ endereco.bairro }</td>
+                                    <td>{ endereco.cidade }</td>
+                                    <td>{ endereco.uf }</td>
+                                    <td>{ endereco.complemento }</td>
+                                </tr>
+                            )
+                        })}
+                    </tbody>
+                </table>
+            </TableEnderecos>
         </Body>
     )
 }

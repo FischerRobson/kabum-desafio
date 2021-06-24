@@ -2,14 +2,15 @@ import React from "react";
 import Input from "../Input";
 import InputMask from "react-input-mask";
 
-interface ICpfInputProps {
+interface ICepInputProps {
     name: string;
     id?: string;
     value: string | undefined;
     onChange: (e: any) => void;
+    onBlur: (e: any) => void;
 }
 
-function CpfInput(props: ICpfInputProps) {
+function CepInput(props: ICepInputProps) {
   function removeMask(e: any) {
     e.target.value = e.target.value.replace(/\D/g, "");
     props.onChange(e);
@@ -18,15 +19,16 @@ function CpfInput(props: ICpfInputProps) {
   return (
     <>
       <InputMask
-        mask="999.999.999-99"
+        mask="99999-999"
         //maskChar={""}
         alwaysShowMask={false}
         type="text"
         name={props.name}
         id={props.id}
         onChange={removeMask}
-        placeholder="Digite o Cpf do cliente"
+        placeholder="Pesquise pelo CEP"
         value={props.value}
+        onBlur={props.onBlur}
       >
         {(inputProps: any) => <Input {...inputProps} />}
       </InputMask>
@@ -34,4 +36,4 @@ function CpfInput(props: ICpfInputProps) {
   );
 }
 
-export default CpfInput;
+export default CepInput;
