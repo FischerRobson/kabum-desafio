@@ -100,7 +100,6 @@ export const Row = styled.div`
     }
 `
 export const TableEnderecos = styled.div`
-
    background-color: ${(props) => props.theme.colors.primary};
    width: 60%;
 
@@ -124,7 +123,7 @@ export const TableEnderecos = styled.div`
     }
 
    table {
-
+    color: ${(props) => props.theme.colors.white};
        .option {
          cursor: pointer;
          transition: 0.2s;

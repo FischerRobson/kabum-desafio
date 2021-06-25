@@ -193,7 +193,7 @@ const CreateCliente = () => {
       {cliente.enderecos && cliente.enderecos?.length > 0 && (
         <TableEnderecos>
           <h4>Endereços</h4>
-          <Table hover responsive>
+          <Table responsive>
             <thead>
               <tr>
                 <th>CEP</th>

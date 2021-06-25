@@ -6,9 +6,9 @@ import Input from "../../components/Input";
 import Button from "../../components/Button";
 
 import { useAuth } from "../../hooks/AuthContext";
+import { ToastContainer } from "react-toastify";
 
 const SignIn: React.FC = () => {
-  document.title = "Wallet | Sign in";
 
   const { signIn } = useAuth();
 
@@ -26,7 +26,7 @@ const SignIn: React.FC = () => {
         <img src={logoImg} alt="Wallet" />
       </Logo>
 
-      <Form onSubmit={() => handleSubmit()}>
+      <Form >
         <FormTitle>Entrar</FormTitle>
 
         <Input
@@ -45,9 +45,20 @@ const SignIn: React.FC = () => {
           required
         />
 
-        <Button type="submit" color="red">Acessar</Button>
-        <Button type="button" color="green">Novo aqui? Se cadastre agora!</Button>
+        <Button type="submit" color="red" onClick={() => handleSubmit()}>Acessar</Button>
+        <Button type="button" color="green">Cadastrar-se agora!</Button>
       </Form>
+      <ToastContainer
+        position="bottom-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </Container>
   );
 };

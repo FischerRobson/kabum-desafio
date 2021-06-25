@@ -1,24 +1,46 @@
 import React, { createContext, useState, useContext } from "react";
 import Cookie from "js-cookie";
+import axios from "axios";
+import { api_login } from "../consts/apis";
+import { toast } from "react-toastify";
 
 interface IAuthContext {
   logged: boolean;
-  signIn(user: string, password: string): void;
+  signIn(username: string, password: string): Promise<void>;
   signOut(): void;
+  loggedUser: IUser;
+}
+
+interface IUser {
+  username: string;
+  id: number;
 }
 
 const AuthContext = createContext<IAuthContext>({} as IAuthContext);
 
 export const AuthProvider: React.FC = ({ children }) => {
-  const isLogged = !!Cookie.get("kabum:logged"); // !! -> converte para uma expressao booleana
+  const isLogged = !!Cookie.get("kabum:logged");
 
   const [logged, setLogged] = useState<boolean>(isLogged);
 
-  const signIn = (user: string, password: string): void => {
-    if (user === "fischer" && password === "123") {
-      Cookie.set("kabum:logged", "true");
-      setLogged(true);
-    } else alert("usuário ou senha incorretos!");
+  const [loggedUser, setLoggedUser] = useState<IUser>({} as IUser);
+
+  const signIn = async (username: string, password: string): Promise<void> => {
+    await axios.post(api_login, { username, password })
+      .then(res => {
+        const { data } = res;
+        if (data.user) {
+          setLoggedUser({ ...data.user })
+          Cookie.set("kabum:logged", "true");
+          setLogged(true);
+        } else {
+          setLogged(false);
+          console.log('errrS')
+          toast.error("Usuário ou Senha incorretos!");
+        }
+      }).catch(err => {
+        console.log(err);
+      })
   };
 
   const signOut = () => {
@@ -27,7 +49,7 @@ export const AuthProvider: React.FC = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ logged, signIn, signOut }}>
+    <AuthContext.Provider value={{ logged, signIn, signOut, loggedUser }}>
       {children}
     </AuthContext.Provider>
   );

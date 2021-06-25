@@ -1,5 +1,5 @@
-const api_url = "http://192.168.0.120/api/";
-//const api_url = "http://localhost/api/";
+//const api_url = "http://192.168.0.120/api/";
+const api_url = "http://localhost/api/";
 
 export const api_listar_clientes = `${api_url}listar-clientes.php`;
 export const api_cadastar_cliente = `${api_url}cadastrar-cliente.php`;

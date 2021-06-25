@@ -8,6 +8,7 @@ import { FiEdit } from 'react-icons/fi';
 import { RiDeleteBin5Line } from 'react-icons/ri';
 
 import { IUser } from "../../pages/ListarUsers";
+import { useAuth } from "../../hooks/AuthContext";
 
 interface ICardProps {
   user: IUser;
@@ -16,6 +17,8 @@ interface ICardProps {
 const Card: React.FC<ICardProps> = ({ user }) => {
 
   const { id, username, nivel } = user;
+
+  const { loggedUser } = useAuth();
 
   return (
     <Container>
@@ -26,12 +29,14 @@ const Card: React.FC<ICardProps> = ({ user }) => {
         <h3>{username}</h3>
         <p>Nivel: {nivel}</p>
       </Info>
-      <SideBar>
-        <Link to={`/users/${id}`} >
-          <FiEdit className="edit" />
-        </Link>
-        <RiDeleteBin5Line className="delete" />
-      </SideBar>
+      {loggedUser.id === id && (
+        <SideBar>
+          <Link to={`/users/${id}`} >
+            <FiEdit className="edit" />
+          </Link>
+          <RiDeleteBin5Line className="delete" />
+        </SideBar>
+      )}
     </Container>
   );
 };
