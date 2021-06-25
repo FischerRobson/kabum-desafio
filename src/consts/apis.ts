@@ -10,5 +10,7 @@ export const api_update_user = "http://localhost/api/editar-usuario.php";
 export const api_get_user = "http://localhost/api/get-usuario.php";
 
 export const api_cadastar_endereco = "http://localhost/api/cadastrar-endereco.php";
+export const api_update_endereco = "http://localhost/api/editar-endereco.php";
+export const api_delete_endereco = "http://localhost/api/delete-endereco.php";
 
 export const api_cep = (cep: string) => { return `http://viacep.com.br/ws/${cep}/json` };

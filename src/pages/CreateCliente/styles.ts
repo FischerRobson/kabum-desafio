@@ -42,14 +42,14 @@ export const Footer = styled.footer`
 
     > button {
         width: 40%;
-    }    
+    }
 
 `
 
 export const Endereco = styled.div`
     width: 100%;
     margin-top: 20px;
-`    
+`
 export const Row = styled.div`
     display: flex;
     margin-top: 5px;
@@ -61,8 +61,11 @@ export const Row = styled.div`
     }
 `
 export const TableEnderecos = styled.div`
+
    background-color: ${(props) => props.theme.colors.primary};
    width: 40%;
+
+   margin-top: 20px;
 
    padding: 10px 14px;
 
@@ -73,8 +76,32 @@ export const TableEnderecos = styled.div`
    justify-content: center;
    flex-direction: column;
 
-   > table {
-       width: 100%;
+   table {
+
+
+       .option {
+         cursor: pointer;
+         transition: 0.2s;
+
+         &:hover{
+           opacity: .7;
+         }
+       }
+
+       .edit {
+        color: ${(props) => props.theme.colors.success};
+       }
+
+       .delete {
+        color: ${(props) => props.theme.colors.warning};
+       }
+
+       td {
+        word-wrap: break-word;         /* All browsers since IE 5.5+ */
+        overflow-wrap: break-word;     /* Renamed property in CSS3 draft spec */
+        padding: 0 5px;
+        border-bottom: 1px solid ${(props) => props.theme.colors.secondary};
+       }
    }
 `
 
