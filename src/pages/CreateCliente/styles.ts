@@ -15,11 +15,19 @@ export const Body = styled.div`
 export const Container = styled.div`
     padding: 10px 14px;
     background-color: ${(props) => props.theme.colors.primary};
-    width: 40%;
+    width: 60%;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+
+    @media (max-width: 1300px) {
+      width: 70%;
+    }
+
+    @media (max-width: 700px) {
+      width: 100%;
+    }
 
     .address {
       color: ${(props) => props.theme.colors.white};
@@ -94,7 +102,7 @@ export const Row = styled.div`
 export const TableEnderecos = styled.div`
 
    background-color: ${(props) => props.theme.colors.primary};
-   width: 40%;
+   width: 60%;
 
    margin-top: 20px;
 
@@ -106,6 +114,14 @@ export const TableEnderecos = styled.div`
    align-items: center;
    justify-content: center;
    flex-direction: column;
+
+   @media (max-width: 1300px) {
+      width: 70%;
+    }
+
+    @media (max-width: 700px) {
+      width: 100%;
+    }
 
    table {
 

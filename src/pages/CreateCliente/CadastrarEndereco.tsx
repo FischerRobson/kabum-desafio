@@ -3,13 +3,9 @@ import Input from "../../components/Input";
 import { useState } from "react";
 import Button from "../../components/Button";
 import { toast } from 'react-toastify';
-import { useHistory, useParams } from 'react-router-dom';
-import axios, { AxiosError } from "axios";
-import { api_cadastar_cliente, api_cadastar_endereco, api_cadastrar_user, api_get_cliente, api_get_user, api_update_cliente, api_update_endereco, api_update_user } from "../../consts/apis";
+import axios from "axios";
+import { api_cadastar_endereco, api_update_endereco } from "../../consts/apis";
 import { useEffect } from "react";
-import TelefoneInput from "../../components/TelefoneInput";
-import CpfInput from "../../components/CpfInput";
-import validateCpf from "../../utils/validateCpf";
 import CepInput from "../../components/CepInput";
 import buscarCep from "../../utils/buscarCep";
 
@@ -33,8 +29,6 @@ interface IEnderecoProps {
 }
 
 const CadastrarEndereco: React.FC<IEnderecoProps> = ({ clienteId, editAddress, close, reloadCliente, addCliente }) => {
-
-  const history = useHistory();
 
   const [endereco, setEndereco] = useState<IEndereco>({
     id: null,
@@ -70,10 +64,6 @@ const CadastrarEndereco: React.FC<IEnderecoProps> = ({ clienteId, editAddress, c
       uf: "",
       complemento: "",
     })
-  }
-
-  const returnPage = () => {
-    return history.goBack();
   }
 
   const findByCep = async () => {

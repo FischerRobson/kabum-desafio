@@ -10,21 +10,21 @@ import { RiDeleteBin5Line } from 'react-icons/ri';
 import { IUser } from "../../pages/ListarUsers";
 
 interface ICardProps {
-    user: IUser;
+  user: IUser;
 }
 
 const Card: React.FC<ICardProps> = ({ user }) => {
-    
-  const { id, username, password, nivel } = user;
+
+  const { id, username, nivel } = user;
 
   return (
-    <Container> 
-        <Logo>
-            <FaUserAlt />
-          </Logo>
-          <Info>
-              <h3>{username}</h3>
-              <p>Nivel: { nivel }</p>
+    <Container>
+      <Logo>
+        <FaUserAlt />
+      </Logo>
+      <Info>
+        <h3>{username}</h3>
+        <p>Nivel: {nivel}</p>
       </Info>
       <SideBar>
         <Link to={`/users/${id}`} >

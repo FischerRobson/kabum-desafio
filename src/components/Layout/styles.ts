@@ -3,10 +3,14 @@ import styled from 'styled-components'
 export const Container = styled.div`
     display: grid;
     grid-template-rows: 70px auto;
-    grid-template-areas: 
+    grid-template-areas:
         'Header'
         'Content';
     height: 100vh;
+
+    @media (max-width: 700px) {
+      height: 220%;
+    }
 `
 
 export const Content = styled.div`

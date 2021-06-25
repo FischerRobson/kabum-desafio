@@ -5,7 +5,7 @@ import Button from "../../components/Button";
 import { toast } from 'react-toastify';
 import { useHistory, useParams } from 'react-router-dom';
 import axios from "axios";
-import { api_cadastar_cliente, api_cadastrar_user, api_delete_endereco, api_get_cliente, api_get_user, api_update_cliente, api_update_user } from "../../consts/apis";
+import { api_cadastar_cliente, api_delete_endereco, api_get_cliente, api_update_cliente } from "../../consts/apis";
 import { useEffect } from "react";
 import TelefoneInput from "../../components/TelefoneInput";
 import CpfInput from "../../components/CpfInput";
@@ -17,6 +17,7 @@ import { FiEdit } from 'react-icons/fi';
 import { RiDeleteBin5Line } from 'react-icons/ri';
 import Collapse from "@kunukn/react-collapse";
 import { IoHome } from 'react-icons/io5';
+import { Table } from 'reactstrap';
 
 type UserRouteParams = {
   id: string;
@@ -133,7 +134,9 @@ const CreateCliente = () => {
     if (!id) return;
     axios.get(api_delete_endereco + "?id=" + id)
       .then(res => {
-        getCliente();
+        toast.success("Endereço excluído", {
+          onOpen: () => getCliente()
+        })
       }).catch(error => {
         console.log(error);
       })
@@ -177,7 +180,7 @@ const CreateCliente = () => {
           />
         </InputContainer>
         <Footer>
-          <Button color="red" >Cancelar</Button>
+          <Button color="red" onClick={() => returnPage()}>Cancelar</Button>
           <Button color="green" onClick={() => addCliente()}>Salvar</Button>
         </Footer>
         <div className="address" onClick={() => setShowAddressRegister(!showAddressRegister)}>
@@ -190,7 +193,7 @@ const CreateCliente = () => {
       {cliente.enderecos && cliente.enderecos?.length > 0 && (
         <TableEnderecos>
           <h4>Endereços</h4>
-          <table>
+          <Table hover responsive>
             <thead>
               <tr>
                 <th>CEP</th>
@@ -219,7 +222,7 @@ const CreateCliente = () => {
                 )
               })}
             </tbody>
-          </table>
+          </Table>
         </TableEnderecos>
       )}
 

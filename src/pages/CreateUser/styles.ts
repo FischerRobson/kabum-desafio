@@ -10,11 +10,19 @@ export const Body = styled.div`
 export const Container = styled.div`
     padding: 10px 14px;
     background-color: ${(props) => props.theme.colors.primary};
-    width: 40%;
+    width: 60%;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+
+    @media (max-width: 1300px) {
+      width: 70%;
+    }
+
+    @media (max-width: 700px) {
+      width: 100%;
+    }
 `
 
 export const Title = styled.h3`
@@ -41,6 +49,6 @@ export const Footer = styled.footer`
 
     > button {
         width: 40%;
-    }    
+    }
 
 `

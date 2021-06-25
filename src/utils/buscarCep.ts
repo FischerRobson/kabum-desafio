@@ -1,4 +1,4 @@
-import axios, { AxiosResponse, AxiosError } from "axios";
+import axios, { AxiosResponse } from "axios";
 import { toast } from "react-toastify";
 import { api_cep } from "../consts/apis";
 
@@ -15,25 +15,14 @@ interface Cep {
   siafi: string;
 }
 
-interface Uf {
-  id: number;
-  sigla: string;
-  nome: string;
-  regiao: {
-    id: number;
-    sigla: string;
-    nome: string;
-  };
-}
-
 export interface DadosCep {
-    logradouro: string,
-    complemento: string,
-    bairro: string,
-    cidade: string,
-    uf: string,
-    codigoUf: number,
-    codigoCidade: string   
+  logradouro: string,
+  complemento: string,
+  bairro: string,
+  cidade: string,
+  uf: string,
+  codigoUf: number,
+  codigoCidade: string
 }
 
 const emitToastError = (message: string) => {
@@ -56,7 +45,7 @@ export const buscarCep = async function (cep: string) {
   const dados = await axios
     .get<Cep>(api_cep(cep))
     .then(async (res: AxiosResponse) => {
-      const { logradouro, complemento, bairro, localidade, uf, ibge, erro } = res.data;
+      const { logradouro, complemento, bairro, localidade, uf, erro } = res.data;
       if (erro) {
         emitToastError("CEP inválido");
       } else {

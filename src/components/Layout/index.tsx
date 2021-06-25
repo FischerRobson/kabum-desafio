@@ -2,18 +2,18 @@ import React from "react";
 import Header from "../Header";
 
 import { ToastContainer } from 'react-toastify';
-  import 'react-toastify/dist/ReactToastify.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 import { Container, Content } from "./styles";
 
 const Layout: React.FC = ({ children }) => {
   return (
     <>
-    <Container>
-      <Header />
-      <Content>
-        {children}
-      </Content>
+      <Container>
+        <Header />
+        <Content>
+          {children}
+        </Content>
       </Container>
       <ToastContainer
         position="bottom-right"
@@ -26,7 +26,7 @@ const Layout: React.FC = ({ children }) => {
         draggable
         pauseOnHover
       />
-      </>
+    </>
   );
 };
 
