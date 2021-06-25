@@ -29,9 +29,10 @@ interface IEnderecoProps {
   editAddress?: IEndereco;
   close: () => void;
   reloadCliente: () => void;
+  addCliente: () => void;
 }
 
-const CadastrarEndereco: React.FC<IEnderecoProps> = ({ clienteId, editAddress, close, reloadCliente }) => {
+const CadastrarEndereco: React.FC<IEnderecoProps> = ({ clienteId, editAddress, close, reloadCliente, addCliente }) => {
 
   const history = useHistory();
 
@@ -58,6 +59,19 @@ const CadastrarEndereco: React.FC<IEnderecoProps> = ({ clienteId, editAddress, c
     })
   }
 
+  const cleanEndereco = () => {
+    setEndereco({
+      id: null,
+      cep: "",
+      logradouro: "",
+      bairro: "",
+      numero: "",
+      cidade: "",
+      uf: "",
+      complemento: "",
+    })
+  }
+
   const returnPage = () => {
     return history.goBack();
   }
@@ -70,11 +84,13 @@ const CadastrarEndereco: React.FC<IEnderecoProps> = ({ clienteId, editAddress, c
   const insertEndereco = () => {
     axios.post(api_cadastar_endereco, { ...endereco, clienteId: clienteId })
       .then(res => {
-        // toast.success("Endereço Cadastrado!", {
-        //   onOpen: () => returnPage(),
-        // })
-        reloadCliente();
-        close();
+        toast.success("Endereço Cadastrado!", {
+          onOpen: () => {
+            reloadCliente();
+            close();
+            cleanEndereco();
+          },
+        })
       }
       ).catch(error => {
         console.log(error);
@@ -85,11 +101,13 @@ const CadastrarEndereco: React.FC<IEnderecoProps> = ({ clienteId, editAddress, c
   const updateEndereco = () => {
     axios.post(api_update_endereco, { ...endereco, id: Number(endereco.id) })
       .then(res => {
-        // toast.success("Endereço Atualizado!", {
-        //   onOpen: () => returnPage(),
-        // })
-        reloadCliente();
-        close();
+        toast.success("Endereço Atualizado!", {
+          onOpen: () => {
+            reloadCliente();
+            close();
+            cleanEndereco();
+          },
+        })
       }
       ).catch(error => {
         console.log(error);
@@ -105,6 +123,7 @@ const CadastrarEndereco: React.FC<IEnderecoProps> = ({ clienteId, editAddress, c
       !endereco.cidade.trim() ||
       !endereco.uf.trim())
       return toast.warn("Preencha todos os campos!");
+    if (!clienteId) return addCliente();
     if (!endereco.id) insertEndereco();
     else updateEndereco();
   }
@@ -160,7 +179,7 @@ const CadastrarEndereco: React.FC<IEnderecoProps> = ({ clienteId, editAddress, c
         </InputContainer>
         <Footer>
           <Button color="red" onClick={() => close()} >Cancelar</Button>
-          <Button color="green" onClick={() => addEndereco()}>{editAddress ? "Editar" : "Cadastrar"}</Button>
+          <Button color="green" onClick={() => addEndereco()}>{endereco.id ? "Editar" : "Cadastrar"}</Button>
         </Footer>
       </Container>
     </Body>

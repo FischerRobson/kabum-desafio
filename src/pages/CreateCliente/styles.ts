@@ -6,6 +6,10 @@ export const Body = styled.div`
    justify-content: center;
    flex-direction: column;
    width: 100%;
+
+   .collapse-css-transition {
+    transition: height 280ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
 `
 
 export const Container = styled.div`
@@ -16,6 +20,33 @@ export const Container = styled.div`
     align-items: center;
     justify-content: center;
     flex-direction: column;
+
+    .address {
+      color: ${(props) => props.theme.colors.white};
+      cursor: pointer;
+      transition: 0.2s;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+
+      &:hover{
+        opacity: .7;
+      }
+
+      > svg {
+        margin-top: 5px;
+        height: 2rem;
+        width: 2rem;
+
+      }
+
+      span {
+        margin-top: 5px;
+      }
+    }
+
 `
 
 export const Title = styled.h3`
@@ -35,10 +66,10 @@ export const InputContainer = styled.div`
 `
 
 export const Footer = styled.footer`
-    width: 60%;
+    width: 80%;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
 
     > button {
         width: 40%;
@@ -77,7 +108,6 @@ export const TableEnderecos = styled.div`
    flex-direction: column;
 
    table {
-
 
        .option {
          cursor: pointer;

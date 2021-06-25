@@ -15,6 +15,8 @@ import { convertObjectToArray } from "../../utils/convertObjectToArray";
 import { IEndereco } from './CadastrarEndereco';
 import { FiEdit } from 'react-icons/fi';
 import { RiDeleteBin5Line } from 'react-icons/ri';
+import Collapse from "@kunukn/react-collapse";
+import { IoHome } from 'react-icons/io5';
 
 type UserRouteParams = {
   id: string;
@@ -178,50 +180,61 @@ const CreateCliente = () => {
           <Button color="red" >Cancelar</Button>
           <Button color="green" onClick={() => addCliente()}>Salvar</Button>
         </Footer>
+        <div className="address" onClick={() => setShowAddressRegister(!showAddressRegister)}>
+          <IoHome />
+          <span>Cadastrar Endereço</span>
+        </div>
+
       </Container>
 
+      {cliente.enderecos && cliente.enderecos?.length > 0 && (
+        <TableEnderecos>
+          <h4>Endereços</h4>
+          <table>
+            <thead>
+              <tr>
+                <th>CEP</th>
+                <th>Logradouro</th>
+                <th>Número</th>
+                <th>Bairro</th>
+                <th>Cidade</th>
+                <th>Uf</th>
+                <th>Complemento</th>
+              </tr>
+            </thead>
+            <tbody>
+              {cliente.enderecos && cliente.enderecos.map(endereco => {
+                return (
+                  <tr key={endereco.id}>
+                    <td>{endereco.cep}</td>
+                    <td>{endereco.logradouro}</td>
+                    <td>{endereco.numero}</td>
+                    <td>{endereco.bairro}</td>
+                    <td>{endereco.cidade}</td>
+                    <td>{endereco.uf}</td>
+                    <td>{endereco.complemento}</td>
+                    <td className="option edit" onClick={() => editAdress(endereco)} ><FiEdit /></td>
+                    <td className="option delete"><RiDeleteBin5Line onClick={() => deleteEndereco(endereco.id)} /></td>
+                  </tr>
+                )
+              })}
+            </tbody>
+          </table>
+        </TableEnderecos>
+      )}
+
       <Endereco>
-        {showAddressRegister &&
+        <Collapse isOpen={showAddressRegister} >
           <CadastrarEndereco
             clienteId={Number(clienteId)}
             editAddress={editAddress}
             close={closeAddressRegister}
             reloadCliente={getCliente}
-          />}
+            addCliente={addCliente}
+          />
+        </Collapse>
       </Endereco>
-      <TableEnderecos>
-        <h4>Endereços</h4>
-        <table>
-          <thead>
-            <tr>
-              <th>CEP</th>
-              <th>Logradouro</th>
-              <th>Número</th>
-              <th>Bairro</th>
-              <th>Cidade</th>
-              <th>Uf</th>
-              <th>Complemento</th>
-            </tr>
-          </thead>
-          <tbody>
-            {cliente.enderecos && cliente.enderecos.map(endereco => {
-              return (
-                <tr key={endereco.id}>
-                  <td>{endereco.cep}</td>
-                  <td>{endereco.logradouro}</td>
-                  <td>{endereco.numero}</td>
-                  <td>{endereco.bairro}</td>
-                  <td>{endereco.cidade}</td>
-                  <td>{endereco.uf}</td>
-                  <td>{endereco.complemento}</td>
-                  <td className="option edit" onClick={() => editAdress(endereco)} ><FiEdit /></td>
-                  <td className="option delete"><RiDeleteBin5Line onClick={() => deleteEndereco(endereco.id)} /></td>
-                </tr>
-              )
-            })}
-          </tbody>
-        </table>
-      </TableEnderecos>
+
     </Body>
   )
 }
