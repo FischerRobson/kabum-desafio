@@ -1,7 +1,10 @@
+## 🚀 Tecnologias
+  - [React](https://reactjs.org)
+- [Styled Components](https://styled-components.com/)
+- [TypeScript](https://www.typescriptlang.org/)
+
 ## 🚀 Pré-Requisitos
-  <ul>
-    <li>Node.JS</li>
-  </ul>
+  - [Node.JS](https://nodejs.org/en/)
   
 ## 🚀 Como executar
 
