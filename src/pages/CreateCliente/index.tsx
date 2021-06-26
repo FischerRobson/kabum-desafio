@@ -92,9 +92,7 @@ const CreateCliente = () => {
         const cliente = res.data.cliente;
         let enderecos = convertObjectToArray(cliente.enderecos);
         enderecos = convertObjectToArray(enderecos);
-        console.log(enderecos)
-        cliente.enderecos = [...enderecos]
-        console.log(enderecos)
+        cliente.enderecos = [...enderecos];
         setCliente(cliente);
       }).catch(error => {
         console.log(error);

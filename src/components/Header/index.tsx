@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 
 import { Container, Profile, Menu, MenuOption, ToogleTheme, LogOut } from './styles'
 
@@ -9,7 +9,14 @@ import { useAuth } from '../../hooks/AuthContext';
 
 const Header = () => {
 
+  const history = useHistory();
+
   const { signOut, loggedUser } = useAuth();
+
+  const loggout = () => {
+    history.push("/");
+    signOut();
+  }
 
   return (
     <Container>
@@ -27,7 +34,7 @@ const Header = () => {
       <ToogleTheme>
         <Toggle />
       </ToogleTheme>
-      <LogOut onClick={() => signOut()}>
+      <LogOut onClick={() => loggout()}>
         <FiLogOut />
       </LogOut>
     </Container>

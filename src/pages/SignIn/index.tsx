@@ -5,6 +5,8 @@ import logoImg from '../../assets/images/kabum-logo.png';
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 
+import { Link } from "react-router-dom";
+
 import { useAuth } from "../../hooks/AuthContext";
 import { ToastContainer } from "react-toastify";
 
@@ -46,7 +48,7 @@ const SignIn: React.FC = () => {
         />
 
         <Button type="submit" color="red" onClick={() => handleSubmit()}>Acessar</Button>
-        <Button type="button" color="green">Cadastrar-se agora!</Button>
+        <Link to="/new-user"><Button type="button" color="green">Cadastrar-se agora!</Button></Link>
       </Form>
       <ToastContainer
         position="bottom-right"

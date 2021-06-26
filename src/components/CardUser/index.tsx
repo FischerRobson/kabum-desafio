@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import { Container, Logo, Info, SideBar } from "./styles";
 
@@ -9,6 +9,8 @@ import { RiDeleteBin5Line } from 'react-icons/ri';
 
 import { IUser } from "../../pages/ListarUsers";
 import { useAuth } from "../../hooks/AuthContext";
+import axios from "axios";
+import { api_delete_user } from "../../consts/apis";
 
 interface ICardProps {
   user: IUser;
@@ -16,9 +18,21 @@ interface ICardProps {
 
 const Card: React.FC<ICardProps> = ({ user }) => {
 
+  const history = useHistory();
+
   const { id, username, nivel } = user;
 
-  const { loggedUser } = useAuth();
+  const { loggedUser, signOut } = useAuth();
+
+  const deleteUser = () => {
+    axios.get(api_delete_user + "?id=" + id)
+      .then(res => {
+        history.push("/");
+        signOut();
+      }).catch(err => {
+        console.log(err);
+      })
+  }
 
   return (
     <Container>
@@ -34,7 +48,7 @@ const Card: React.FC<ICardProps> = ({ user }) => {
           <Link to={`/users/${id}`} >
             <FiEdit className="edit" />
           </Link>
-          <RiDeleteBin5Line className="delete" />
+          <RiDeleteBin5Line onClick={() => deleteUser()} className="delete" />
         </SideBar>
       )}
     </Container>

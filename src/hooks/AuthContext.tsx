@@ -35,11 +35,11 @@ export const AuthProvider: React.FC = ({ children }) => {
           setLogged(true);
         } else {
           setLogged(false);
-          console.log('errrS')
           toast.error("Usuário ou Senha incorretos!");
         }
       }).catch(err => {
         console.log(err);
+        setLoggedUser({} as IUser)
       })
   };
 
