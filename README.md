@@ -10,7 +10,7 @@
 
 Primeiro faça o clone do repositório:
 ```bash
-fit clone https://github.com/FischerRobson/kabum-desafio.git
+git clone https://github.com/FischerRobson/kabum-desafio.git
 ```
 Em seguida, instale as dependencias do projeto:
 ```bash
