@@ -1,4 +1,8 @@
-
+## 🚀 Pré-Requisitos
+  <ul>
+    <li>Node.JS</li>
+  </ul>
+  
 ## 🚀 Como executar
 
 Primeiro faça o download do repositório:
