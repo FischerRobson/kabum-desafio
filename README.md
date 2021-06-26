@@ -8,9 +8,9 @@
   
 ## 🚀 Como executar
 
-Primeiro faça o download do repositório:
+Primeiro faça o clone do repositório:
 ```bash
-https://github.com/FischerRobson/kabum-desafio.git
+fit clone https://github.com/FischerRobson/kabum-desafio.git
 ```
 Em seguida, instale as dependencias do projeto:
 ```bash
