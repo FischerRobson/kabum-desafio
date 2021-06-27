@@ -145,13 +145,6 @@ const CadastrarEndereco: React.FC<IEnderecoProps> = ({ clienteId, editAddress, c
             value={endereco.bairro}
             onChange={(e) => updateInputValue(e)}
           />
-          {/* <Input
-            type="text"
-            placeholder="Cidade"
-            name="cidade"
-            value={endereco.cidade}
-            onChange={(e) => updateInputValue(e)}
-          /> */}
           <CidadesInput
             uf={endereco.uf}
             name="cidade"

@@ -26,10 +26,10 @@ const CidadesInput: React.FC<ISelectProps> = ({ uf, ...props }) => {
   }, [uf])
 
   return (
-    <Container>
+    <Container {...props}>
       {cidades.map(cidade => {
         return (
-          <option value={cidade}>{cidade}</option>
+          <option value={cidade.toUpperCase()}>{cidade}</option>
         )
       })}
 
