@@ -29,9 +29,12 @@ Acesse o link ou <a href="http://localhost:3000/">clique aqui</a>:
 http://localhost:3000/
 ```
 
-Faça login com 
-  usuário: admin
-  senha: admin123
+Faça login com :
+```bash
+usuário: admin
+senha: admin123
+```
+Ou então, caso queria, crie seu próprio usuário.
 
 
 
