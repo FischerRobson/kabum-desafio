@@ -3,10 +3,11 @@ import Input from "../Input";
 import InputMask from "react-input-mask";
 
 interface ICpfInputProps {
-    name: string;
-    id?: string;
-    value: string | undefined;
-    onChange: (e: any) => void;
+  name: string;
+  id?: string;
+  value: string | undefined;
+  onChange: (e: any) => void;
+  onBlur: (e: any) => void;
 }
 
 function CpfInput(props: ICpfInputProps) {
@@ -20,6 +21,7 @@ function CpfInput(props: ICpfInputProps) {
       <InputMask
         mask="999.999.999-99"
         //maskChar={""}
+        onBlur={props.onBlur}
         alwaysShowMask={false}
         type="text"
         name={props.name}

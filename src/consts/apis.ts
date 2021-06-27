@@ -1,12 +1,13 @@
 //const api_url = "http://192.168.0.120/api/";
-//const api_url = "http://localhost/kabum-api/";
-const api_url = "http://localhost/api2.0/"; //teste
+const api_url = "http://localhost/kabum-api/";
+//const api_url = "http://localhost/api2.0/"; //teste
 
 export const api_listar_clientes = `${api_url}clientes/list`;
 export const api_cadastar_cliente = `${api_url}clientes/insert`;
 export const api_update_cliente = `${api_url}clientes/update`;
 export const api_get_cliente = `${api_url}clientes/get`;
 export const api_delete_cliente = `${api_url}clientes/delete`;
+export const api_check_cliente_cpf = `${api_url}clientes/check-cpf`;
 
 export const api_listar_users = `${api_url}usuarios/list`;
 export const api_cadastrar_user = `${api_url}usuarios/insert`;

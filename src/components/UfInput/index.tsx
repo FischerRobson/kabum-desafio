@@ -29,7 +29,7 @@ const UfInput: React.FC<ISelectProps> = ({ ...props }) => {
       <option value="">Ufs</option>
       {ufs.map(uf => {
         return (
-          <option value={uf}>{uf}</option>
+          <option key={uf} value={uf}>{uf}</option>
         )
       })}
     </Container>

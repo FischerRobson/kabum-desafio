@@ -5,7 +5,7 @@ import Button from "../../components/Button";
 import { toast } from 'react-toastify';
 import { useHistory, useParams } from 'react-router-dom';
 import axios from "axios";
-import { api_cadastar_cliente, api_delete_endereco, api_get_cliente, api_update_cliente } from "../../consts/apis";
+import { api_cadastar_cliente, api_check_cliente_cpf, api_delete_endereco, api_get_cliente, api_update_cliente } from "../../consts/apis";
 import { useEffect } from "react";
 import TelefoneInput from "../../components/TelefoneInput";
 import CpfInput from "../../components/CpfInput";
@@ -49,6 +49,8 @@ const CreateCliente = () => {
   } as ICliente);
 
   const [showAddressRegister, setShowAddressRegister] = useState(false);
+
+  const [cpfAlreadyExists, setCpfAlreadyExists] = useState(false);
 
   const closeAddressRegister = () => {
     setShowAddressRegister(false);
@@ -99,6 +101,22 @@ const CreateCliente = () => {
       })
   }
 
+  const checkCpf = async () => {
+    await axios.get(api_check_cliente_cpf + "?cpf=" + cliente.cpf)
+      .then(res => {
+        const { data } = res;
+        if (!data.exists) return;
+        else if (data.cliente.id === cliente.id) return;
+        else {
+          setCpfAlreadyExists(true);
+          toast.warn("CPF já cadastrado em: " + data.cliente.nome);
+        };
+      }).catch(error => {
+        console.log(error);
+        console.log(error.message);
+      })
+  }
+
   const updateCliente = async () => {
     await axios.post(api_update_cliente, cliente)
       .then(res => {
@@ -115,6 +133,7 @@ const CreateCliente = () => {
   const addCliente = () => {
     if (!cliente.nome || !cliente.cpf || !cliente.dataNascimento || !cliente.rg) return toast.warn("Preencha todos os campos!");
     if (!validateCpf(cliente.cpf)) return toast.warn("CPF inválido");
+    if (cpfAlreadyExists) return toast.warn("CPF já cadastrado");
     if (clienteId) updateCliente();
     else saveCliente();
   }
@@ -154,6 +173,7 @@ const CreateCliente = () => {
           />
           <CpfInput
             name="cpf"
+            onBlur={() => checkCpf()}
             value={cliente.cpf}
             onChange={(e) => updateInputValue(e)}
           />
