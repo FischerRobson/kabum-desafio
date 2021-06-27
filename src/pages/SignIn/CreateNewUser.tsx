@@ -2,15 +2,18 @@ import { Body, Container, Title, InputContainer, Footer } from "./createUserStyl
 import Input from "../../components/Input";
 import { useState } from "react";
 import Button from "../../components/Button";
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import { useHistory } from 'react-router-dom';
 import axios from "axios";
 import { api_cadastrar_user, } from "../../consts/apis";
+import { useAuth } from "../../hooks/AuthContext";
 
 
 const CreateNewUser = () => {
 
   const history = useHistory();
+
+  const { newUserCreated } = useAuth();
 
   const [userName, setUserName] = useState<string>("");
   const [userPassword, setUserPassword] = useState("");
@@ -23,7 +26,7 @@ const CreateNewUser = () => {
       nivel: 1
     }).then(res => {
       toast.success("Usuário Cadastrado!", {
-        onOpen: () => returnPage(),
+        onOpen: () => newUserCreated(userName),
       })
     }
     ).catch(error => {
@@ -37,6 +40,7 @@ const CreateNewUser = () => {
   const addUser = () => {
     if (!userName.trim() || !userPassword.trim() || !userPasswordConfirm.trim()) return toast.warn("Preencha todos os campos!");
     if (userPassword.trim() !== userPasswordConfirm.trim()) return toast.warn("As senhas são diferentes!");
+    if (userPassword.trim().length < 8) return toast.warn("A senha deve conter pelo menos 8 números!");
     insertUser();
 
   }
@@ -80,6 +84,17 @@ const CreateNewUser = () => {
           <Button color="green" onClick={() => addUser()}>Salvar</Button>
         </Footer>
       </Container>
+      <ToastContainer
+        position="bottom-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </Body>
   )
 }

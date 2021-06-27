@@ -43,6 +43,10 @@ export const MenuOption = styled.h2`
       margin-right: 15px;
     }
 
+    .selected {
+      color: ${props => props.theme.colors.success};
+    }
+
     cursor: pointer;
 
     transition: all .3s;

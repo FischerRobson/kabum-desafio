@@ -9,19 +9,20 @@ interface IAuthContext {
   signIn(username: string, password: string): Promise<void>;
   signOut(): void;
   loggedUser: IUser;
+  newUserCreated(username: string): void
 }
 
 interface IUser {
   username: string;
-  id: number;
+  id: number | null;
 }
 
 const AuthContext = createContext<IAuthContext>({} as IAuthContext);
 
 export const AuthProvider: React.FC = ({ children }) => {
-  const isLogged = !!Cookie.get("kabum:logged");
+  //const isLogged = !!Cookie.get("kabum:logged");
 
-  const [logged, setLogged] = useState<boolean>(isLogged);
+  const [logged, setLogged] = useState<boolean>(false);
 
   const [loggedUser, setLoggedUser] = useState<IUser>({} as IUser);
 
@@ -31,7 +32,7 @@ export const AuthProvider: React.FC = ({ children }) => {
         const { data } = res;
         if (data.user) {
           setLoggedUser({ ...data.user })
-          Cookie.set("kabum:logged", "true");
+          //Cookie.set("kabum:logged", "true");
           setLogged(true);
         } else {
           setLogged(false);
@@ -43,13 +44,18 @@ export const AuthProvider: React.FC = ({ children }) => {
       })
   };
 
+  const newUserCreated = (username: string) => {
+    setLogged(true);
+    setLoggedUser({ username: username, id: null })
+  }
+
   const signOut = () => {
     Cookie.remove("logged");
     setLogged(false);
   };
 
   return (
-    <AuthContext.Provider value={{ logged, signIn, signOut, loggedUser }}>
+    <AuthContext.Provider value={{ logged, signIn, signOut, loggedUser, newUserCreated }}>
       {children}
     </AuthContext.Provider>
   );

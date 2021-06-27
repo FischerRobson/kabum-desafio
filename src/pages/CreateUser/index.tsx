@@ -73,6 +73,7 @@ const CreateUser = () => {
   const addUser = () => {
     if (!userName.trim() || !userPassword.trim() || !userPasswordConfirm.trim()) return toast.warn("Preencha todos os campos!");
     if (userPassword.trim() !== userPasswordConfirm.trim()) return toast.warn("As senhas são diferentes!");
+    if (userPassword.trim().length < 8) return toast.warn("A senha deve conter pelo menos 8 números!");
     if (!userId) insertUser();
     else updateUser();
   }
