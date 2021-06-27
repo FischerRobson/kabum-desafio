@@ -8,11 +8,11 @@
   
 ## 🚀 Como executar
 
-Primeiro faça o clone do repositório:
+Primeiro faça o clone do repositório, pode ser realizado em qualquer diretório:
 ```bash
 git clone https://github.com/FischerRobson/kabum-desafio.git
 ```
-Em seguida, instale as dependencias do projeto:
+Em seguida, navegue ate o diretorio do projeto e instale as dependencias do projeto:
 ```bash
 npm install
 # ou
