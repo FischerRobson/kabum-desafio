@@ -8,6 +8,8 @@ import { api_cadastar_endereco, api_update_endereco } from "../../consts/apis";
 import { useEffect } from "react";
 import CepInput from "../../components/CepInput";
 import buscarCep from "../../utils/buscarCep";
+import UfInput from "../../components/UfInput";
+import CidadesInput from "../../components/CidadesInput";
 
 export interface IEndereco {
   id: number | null;
@@ -143,21 +145,24 @@ const CadastrarEndereco: React.FC<IEnderecoProps> = ({ clienteId, editAddress, c
             value={endereco.bairro}
             onChange={(e) => updateInputValue(e)}
           />
-          <Input
+          {/* <Input
             type="text"
             placeholder="Cidade"
             name="cidade"
             value={endereco.cidade}
             onChange={(e) => updateInputValue(e)}
+          /> */}
+          <CidadesInput
+            uf={endereco.uf}
+            name="cidade"
+            value={endereco.cidade}
+            onChange={(e) => updateInputValue(e)}
           />
           <Row>
-            <Input
-              type="text"
-              placeholder="UF"
+            <UfInput
               name="uf"
               value={endereco.uf}
-              onChange={(e) => updateInputValue(e)}
-            />
+              onChange={(e) => updateInputValue(e)} />
             <Input
               type="text"
               placeholder="Número"
